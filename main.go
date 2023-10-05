@@ -1,8 +1,8 @@
 package main
 
 import (
-	"contact-store/controllers"
 	"contact-store/models"
+	"contact-store/routes"
 
 	"fmt"
 	"net/http"
@@ -17,9 +17,9 @@ func init() {
 
 func main() {
 	router := mux.NewRouter()
-	router.HandleFunc("/register", controllers.Register).Methods("POST")
-	router.HandleFunc("/login", controllers.Login).Methods("POST")
-	// router.Use(middleware.HandleJwtAuth)
+	routes.AuthRoutes(router)
+	subRouter := router.PathPrefix("/auth").Subrouter()
+	routes.ContactRoutes(subRouter)
 
 	port := os.Getenv("PORT")
 	if port == "" {
