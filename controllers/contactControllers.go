@@ -18,6 +18,13 @@ func CreateContact(w http.ResponseWriter, r *http.Request) {
 	if resp, ok := contact.ValidateReqBody(); !ok {
 		utils.Respond(w, 400, resp)
 	}
+	tempContact := &models.Contact{}
+	err = models.GetDB().Raw("select * from contacts where phone_number=?", contact.PhoneNumber).First(tempContact).Error
+
+	if tempContact.PhoneNumber == contact.PhoneNumber {
+		utils.Respond(w, 201, utils.Message("201", "contact already exists"))
+		return
+	}
 	models.GetDB().Create(contact)
 	if contact.ID <= 0 {
 		utils.Respond(w, 500, utils.Message("500", "Failed to create contact"))
@@ -39,6 +46,7 @@ func GetAllContacts(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Println(err)
 		utils.Respond(w, 500, utils.Message("500", "Failed to fetch contacts"))
+		return
 	}
 	utils.Respond(w, 200, map[string]interface{}{
 		"data": map[string]interface{}{

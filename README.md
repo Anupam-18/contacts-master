@@ -1,4 +1,4 @@
-# Conacts store and Management using Golang+Postgres
+# Contacts store and Management using Golang+Postgres
 
 ## Table of contents
 

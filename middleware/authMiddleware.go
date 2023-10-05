@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/dgrijalva/jwt-go"
 )
@@ -36,6 +37,10 @@ var HandleJwtAuth = func(next http.Handler) http.Handler {
 		}
 		if !token.Valid {
 			utils.Respond(w, 403, utils.Message("403", "Invalid token"))
+			return
+		}
+		if tokenObj.ExpiresAt < time.Now().Local().Unix() {
+			utils.Respond(w, 403, utils.Message("403", "Token has expired"))
 			return
 		}
 		ctx := context.WithValue(r.Context(), "user", tokenObj.UserId)

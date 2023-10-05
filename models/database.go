@@ -29,7 +29,7 @@ func InitDB() {
 	}
 
 	db = connection
-	db.AutoMigrate(&User{})
+	db.AutoMigrate(&User{}, &Contact{})
 }
 
 func GetDB() *gorm.DB {

@@ -11,6 +11,7 @@ import (
 
 type Token struct {
 	UserId uint
+	Email  string
 	jwt.StandardClaims
 }
 type User struct {
