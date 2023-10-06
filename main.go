@@ -32,5 +32,3 @@ func main() {
 		return
 	}
 }
-
-// 	router.NotFoundHandler = app.NotFoundHandler

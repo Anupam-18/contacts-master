@@ -16,8 +16,7 @@ import (
 
 func Register(w http.ResponseWriter, r *http.Request) {
 	user := &models.User{}
-	err := json.NewDecoder(r.Body).Decode(user)
-	// fmt.Println(r.Body)
+	err := json.NewDecoder(r.Body).Decode(user) //handle the error inline
 	if err != nil {
 		utils.Respond(w, 400, utils.Message("400", "Invalid request body"))
 		return
@@ -43,6 +42,7 @@ func Register(w http.ResponseWriter, r *http.Request) {
 }
 
 func Login(w http.ResponseWriter, r *http.Request) {
+
 	user := &models.User{}
 	response := make(map[string]interface{})
 	err := json.NewDecoder(r.Body).Decode(user)
