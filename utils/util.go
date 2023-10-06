@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 	"regexp"
+	"strings"
 )
 
 func Message(status string, message string) map[string]interface{} {
@@ -25,5 +26,5 @@ func IsEmailValid(email string) bool {
 }
 func IsPhoneValid(phone string) bool {
 	phoneRegex := regexp.MustCompile(`^(?:(?:\(?(?:00|\+)([1-4]\d\d|[1-9]\d?)\)?)?[\-\.\ \\\/]?)?((?:\(?\d{1,}\)?[\-\.\ \\\/]?){0,})(?:[\-\.\ \\\/]?(?:#|ext\.?|extension|x)[\-\.\ \\\/]?(\d+))?$`)
-	return phoneRegex.MatchString(phone)
+	return phoneRegex.MatchString(strings.TrimSpace(phone))
 }
