@@ -24,8 +24,8 @@ App is built using
 
 - The service provides the APIs for registration and login
 - Enabled a way to authorize the user for subsequent calls using JWT 
-- Implemented CRUD operations on contacts, now we can create and get      contacts 
-- More features on the way and will be updated
+- Implemented CRUD operations on contacts, now we can create and get contacts for the particular user 
+- Implemented deletion and updation of contacts as well. One can update contact details and delete as your wish
 
 
 ### Launch
